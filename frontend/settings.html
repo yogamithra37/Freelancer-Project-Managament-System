@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - FreelanceHub</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/i18n.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/settings.js"></script>
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar" id="appSidebar"></aside>
+
+    <div class="main-content">
+      <header class="top-navbar" id="appHeader"></header>
+
+      <main class="page-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title" data-i18n="settings">Application Settings</h1>
+            <p class="page-subtitle">Configure language, theme preferences, and monthly target benchmarks</p>
+          </div>
+        </div>
+
+        <div class="panel" style="max-width:680px;">
+          <form id="settingsGoalForm">
+            <!-- Language Settings -->
+            <div class="form-group" style="border-bottom:1px solid var(--border-color); padding-bottom:20px; margin-bottom:20px;">
+              <label class="form-label" style="font-size:16px; font-weight:700;">System Language</label>
+              <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">Select your preferred display language for FreelanceHub</p>
+              <select id="settingsLangSelect" class="form-control" style="max-width:300px;">
+                <option value="en">English</option>
+                <option value="ta">Tamil (தமிழ்)</option>
+                <option value="hi">Hindi (हिंदी)</option>
+              </select>
+            </div>
+
+            <!-- Theme Settings -->
+            <div class="form-group" style="border-bottom:1px solid var(--border-color); padding-bottom:20px; margin-bottom:20px;">
+              <label class="form-label" style="font-size:16px; font-weight:700;">Theme Appearance</label>
+              <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">Choose between Light canvas and Eye-safe Dark mode</p>
+              <select id="settingsThemeSelect" class="form-control" style="max-width:300px;">
+                <option value="light">Light Mode</option>
+                <option value="dark">Dark Mode</option>
+              </select>
+            </div>
+
+            <!-- Target Goal -->
+            <div class="form-group" style="margin-bottom:20px;">
+              <label class="form-label" style="font-size:16px; font-weight:700;">Monthly Revenue Target (₹)</label>
+              <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">Set your target monthly income benchmark displayed on the dashboard</p>
+              <input type="number" id="settingsMonthlyGoal" class="form-control" value="150000" style="max-width:300px;">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save Settings</button>
+          </form>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Details - FreelanceHub</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/i18n.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/project-details.js"></script>
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar" id="appSidebar"></aside>
+
+    <div class="main-content">
+      <header class="top-navbar" id="appHeader"></header>
+
+      <main class="page-body">
+        <div style="margin-bottom:20px;">
+          <a href="/projects.html" style="color:var(--primary); font-weight:600; text-decoration:none; font-size:14px;">← Back to Projects</a>
+        </div>
+
+        <!-- Project Overview Header Panel -->
+        <div class="panel" style="margin-bottom:24px;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:16px;">
+            <div>
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+                <span class="badge badge-info" id="pdCategory">Category</span>
+                <span id="pdHealth"></span>
+              </div>
+              <h1 style="font-size:26px; font-weight:800; color:var(--text-main);" id="pdName">Loading...</h1>
+              <div style="font-size:14px; color:var(--text-muted); margin-top:4px;">Client: <strong id="pdClientName">...</strong></div>
+            </div>
+
+            <div style="text-align:right;">
+              <div style="font-size:12px; color:var(--text-muted);">Status & Priority</div>
+              <div style="display:flex; gap:8px; margin-top:4px;">
+                <span class="badge badge-success" id="pdStatus">In Progress</span>
+                <span class="badge badge-warning" id="pdPriority">High</span>
+              </div>
+            </div>
+          </div>
+
+          <p style="font-size:14px; color:var(--text-muted); line-height:1.6; margin-bottom:20px;" id="pdDescription">Loading description...</p>
+
+          <div style="display:flex; gap:24px; font-size:13px; color:var(--text-muted); border-top:1px solid var(--border-color); padding-top:16px;">
+            <div>Start Date: <strong id="pdStartDate" style="color:var(--text-main);">-</strong></div>
+            <div>Deadline: <strong id="pdDeadline" style="color:var(--text-main);">-</strong></div>
+          </div>
+        </div>
+
+        <!-- Financial & Progress Metrics -->
+        <div class="grid-cols-4" style="margin-bottom:24px;">
+          <div class="stat-card">
+            <div class="stat-icon indigo">💰</div>
+            <div class="stat-content">
+              <div class="stat-title">Budget</div>
+              <div class="stat-value" id="pdBudget">₹0</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon rose">💸</div>
+            <div class="stat-content">
+              <div class="stat-title">Expenses</div>
+              <div class="stat-value" id="pdExpenses">₹0</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon emerald">💵</div>
+            <div class="stat-content">
+              <div class="stat-title">Remaining Budget</div>
+              <div class="stat-value" id="pdRemaining">₹0</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon sky">📊</div>
+            <div class="stat-content">
+              <div class="stat-title">Overall Progress</div>
+              <div class="stat-value" id="pdProgressText">0%</div>
+              <div class="progress-container" style="margin-top:6px;">
+                <div class="progress-bar success" id="pdProgressBar" style="width:0%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Tasks List -->
+        <div class="panel">
+          <div class="panel-header">
+            <h3 class="panel-title">Project Tasks</h3>
+            <a href="/tasks.html" class="btn btn-primary btn-sm">+ Add Task</a>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Task</th>
+                  <th>Assigned</th>
+                  <th>Status</th>
+                  <th>Due Date</th>
+                  <th>Progress</th>
+                </tr>
+              </thead>
+              <tbody id="pdTasksList"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Project Financial Breakdown (Expenses & Invoices) -->
+        <div class="grid-cols-2" style="margin-bottom:24px;">
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title">Project Expenses</h3>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody id="pdExpensesList"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title">Invoices</h3>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Invoice #</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="pdInvoicesList"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+</body>
+</html>

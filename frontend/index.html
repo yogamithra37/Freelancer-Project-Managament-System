@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreelanceHub - Freelancer Project Management System</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script>
+    const token = localStorage.getItem('freelancehub_token');
+    if (token) {
+      window.location.href = '/dashboard.html';
+    } else {
+      window.location.href = '/login.html';
+    }
+  </script>
+</head>
+<body style="display:flex; align-items:center; justify-content:center; min-height:100vh; background:var(--light-bg);">
+  <div style="text-align:center;">
+    <h2 style="font-size:24px; font-weight:800; color:var(--primary);">FreelanceHub</h2>
+  </div>
+</body>
+</html>

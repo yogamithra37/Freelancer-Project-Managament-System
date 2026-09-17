@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Details - FreelanceHub</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/i18n.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/client-details.js"></script>
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar" id="appSidebar"></aside>
+
+    <div class="main-content">
+      <header class="top-navbar" id="appHeader"></header>
+
+      <main class="page-body">
+        <div style="margin-bottom:20px;">
+          <a href="/clients.html" style="color:var(--primary); font-weight:600; text-decoration:none; font-size:14px;">← Back to Clients</a>
+        </div>
+
+        <!-- Client Overview Header Panel -->
+        <div class="panel" style="margin-bottom:24px;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px;">
+            <div style="display:flex; gap:16px; align-items:center;">
+              <div style="width:56px; height:56px; border-radius:50%; background:var(--primary-light); color:var(--primary); font-weight:800; font-size:24px; display:flex; align-items:center; justify-content:center;">
+                C
+              </div>
+              <div>
+                <h1 style="font-size:26px; font-weight:800; color:var(--text-main);" id="cdName">Loading...</h1>
+                <div style="font-size:15px; color:var(--text-muted);" id="cdCompany">...</div>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:24px; font-size:13px; text-align:right;">
+              <div>
+                <div style="color:var(--text-muted);">Total Projects</div>
+                <div style="font-size:20px; font-weight:800; color:var(--text-main);" id="cdTotalProjects">0</div>
+              </div>
+              <div>
+                <div style="color:var(--text-muted);">Total Paid</div>
+                <div style="font-size:20px; font-weight:800; color:var(--success);" id="cdTotalRevenue">₹0</div>
+              </div>
+              <div>
+                <div style="color:var(--text-muted);">Outstanding</div>
+                <div style="font-size:20px; font-weight:800; color:var(--danger);" id="cdOutstanding">₹0</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-cols-3" style="margin-top:24px; padding-top:20px; border-top:1px solid var(--border-color); font-size:13px;">
+            <div>
+              <div style="color:var(--text-muted);">Email</div>
+              <div style="font-weight:600; color:var(--text-main);" id="cdEmail">-</div>
+            </div>
+            <div>
+              <div style="color:var(--text-muted);">Phone</div>
+              <div style="font-weight:600; color:var(--text-main);" id="cdPhone">-</div>
+            </div>
+            <div>
+              <div style="color:var(--text-muted);">GSTIN</div>
+              <div style="font-weight:600; color:var(--text-main); font-family:monospace;" id="cdGSTIN">-</div>
+            </div>
+          </div>
+
+          <div style="margin-top:12px; font-size:13px;">
+            <div style="color:var(--text-muted);">Address</div>
+            <div style="font-weight:600; color:var(--text-main);" id="cdAddress">-</div>
+          </div>
+
+          <div style="margin-top:12px; font-size:13px;">
+            <div style="color:var(--text-muted);">Internal Notes</div>
+            <div style="color:var(--text-muted); line-height:1.4;" id="cdNotes">-</div>
+          </div>
+        </div>
+
+        <!-- Associated Projects -->
+        <div class="panel">
+          <div class="panel-header">
+            <h3 class="panel-title">Projects for this Client</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Project Name</th>
+                  <th>Category</th>
+                  <th>Budget</th>
+                  <th>Progress</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="cdProjectsList"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Associated Invoices -->
+        <div class="panel">
+          <div class="panel-header">
+            <h3 class="panel-title">Client Billing & Invoices</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Invoice #</th>
+                  <th>Issue Date</th>
+                  <th>Total Amount</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="cdInvoicesList"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Associated Tasks -->
+        <div class="panel">
+          <div class="panel-header">
+            <h3 class="panel-title">Tasks for this Client</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Task Title</th>
+                  <th>Status</th>
+                  <th>Priority</th>
+                  <th>Due Date</th>
+                </tr>
+              </thead>
+              <tbody id="cdTasksList"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+</body>
+</html>

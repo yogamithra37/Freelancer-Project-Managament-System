@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expenses - FreelanceHub</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/i18n.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/expenses.js"></script>
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar" id="appSidebar"></aside>
+
+    <div class="main-content">
+      <header class="top-navbar" id="appHeader"></header>
+
+      <main class="page-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title" data-i18n="expenses">Expense Tracker</h1>
+            <p class="page-subtitle">Log software subscriptions, hosting fees, domain purchases, and equipment costs</p>
+          </div>
+          <button class="btn btn-primary" onclick="openExpenseModal()">+ Add Expense</button>
+        </div>
+
+        <!-- Expense Total Banner -->
+        <div class="panel" style="padding:20px; margin-bottom:20px; background:linear-gradient(135deg, var(--card-bg), var(--light-bg));">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+            <div>
+              <div style="font-size:13px; color:var(--text-muted);">Total Expense Outflow</div>
+              <div style="font-size:28px; font-weight:800; color:var(--danger);" id="totalExpenseSum">₹0</div>
+            </div>
+
+            <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+              <input type="text" id="expenseSearch" class="form-control" placeholder="Search expense or project..." style="max-width:240px;">
+              <div style="width:200px;">
+                <select id="expenseCategoryFilter" class="form-control">
+                  <option value="">All Categories</option>
+                  <option value="Software & SaaS">Software & SaaS</option>
+                  <option value="Hosting & Cloud">Hosting & Cloud</option>
+                  <option value="Hardware & Equipment">Hardware & Equipment</option>
+                  <option value="Office & Supplies">Office & Supplies</option>
+                  <option value="Marketing">Marketing</option>
+                  <option value="Travel">Travel</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Expenses Table Panel -->
+        <div class="panel">
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Description</th>
+                  <th>Category</th>
+                  <th>Associated Project</th>
+                  <th>Amount</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="expensesContainer"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Add/Edit Expense Modal -->
+  <div class="modal-overlay" id="expenseModal">
+    <div class="modal-content" style="max-width:540px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalExpenseTitle">Add New Expense</h3>
+        <button class="modal-close" onclick="closeExpenseModal()">&times;</button>
+      </div>
+
+      <form id="expenseForm">
+        <input type="hidden" id="expenseId">
+
+        <div class="form-group">
+          <label class="form-label" for="expenseProjectSelect">Associated Project (Optional)</label>
+          <select id="expenseProjectSelect" class="form-control"></select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="expenseCategory">Category *</label>
+            <select id="expenseCategory" class="form-control" required>
+              <option value="Software & SaaS">Software & SaaS</option>
+              <option value="Hosting & Cloud">Hosting & Cloud</option>
+              <option value="Hardware & Equipment">Hardware & Equipment</option>
+              <option value="Office & Supplies">Office & Supplies</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Travel">Travel</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="expenseAmount">Amount (₹) *</label>
+            <input type="number" id="expenseAmount" class="form-control" placeholder="1500" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="expenseDescription">Expense Description *</label>
+          <input type="text" id="expenseDescription" class="form-control" placeholder="AWS Cloud Hosting Subscription" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="expenseDate">Expense Date *</label>
+            <input type="date" id="expenseDate" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="expensePaymentMethod">Payment Mode</label>
+            <select id="expensePaymentMethod" class="form-control">
+              <option value="UPI">UPI / GPay / PhonePe</option>
+              <option value="Net Banking">Net Banking</option>
+              <option value="Credit Card">Credit Card</option>
+              <option value="Debit Card">Debit Card</option>
+              <option value="Cash">Cash</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="expenseNotes">Notes / Receipt Reference</label>
+          <input type="text" id="expenseNotes" class="form-control" placeholder="Txn ID: 987654321">
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:20px;">
+          <button type="button" class="btn btn-secondary" onclick="closeExpenseModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Expense</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

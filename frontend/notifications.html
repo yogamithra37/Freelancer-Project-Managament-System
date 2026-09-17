@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notifications - FreelanceHub</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/i18n.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/notifications.js"></script>
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar" id="appSidebar"></aside>
+
+    <div class="main-content">
+      <header class="top-navbar" id="appHeader"></header>
+
+      <main class="page-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title" data-i18n="notifications">Notifications Center</h1>
+            <p class="page-subtitle">Deadline warnings, overdue payment alerts, and task updates</p>
+          </div>
+          <button class="btn btn-secondary" id="markAllReadBtn">Mark All Read</button>
+        </div>
+
+        <div class="panel">
+          <div id="notificationsList"></div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+</body>
+</html>

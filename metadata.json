@@ -1,0 +1,6 @@
+{
+  "name": "FreelanceHub",
+  "description": "Full-Stack Freelancer Project Management System with Indian localization, multi-language support, client tracking, invoices, expenses, tasks, and reports.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

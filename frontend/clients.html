@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clients - FreelanceHub</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/i18n.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/clients.js"></script>
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar" id="appSidebar"></aside>
+
+    <div class="main-content">
+      <header class="top-navbar" id="appHeader"></header>
+
+      <main class="page-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title" data-i18n="clients">Client Directory</h1>
+            <p class="page-subtitle">Manage client accounts, GST information, contacts, and revenue</p>
+          </div>
+          <button class="btn btn-primary" onclick="openClientModal()">+ Add Client</button>
+        </div>
+
+        <!-- Filters -->
+        <div class="panel" style="padding:16px; margin-bottom:20px;">
+          <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:center;">
+            <div style="flex:1; min-width:240px;">
+              <input type="text" id="clientSearch" class="form-control" placeholder="Search client name, company, or email..." data-i18n="search">
+            </div>
+
+            <div style="width:180px;">
+              <select id="clientCityFilter" class="form-control">
+                <option value="">All Indian Cities</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Coimbatore">Coimbatore</option>
+                <option value="Bengaluru">Bengaluru</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Hyderabad">Hyderabad</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Clients Grid -->
+        <div class="grid-cols-3" id="clientsContainer"></div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Add/Edit Client Modal -->
+  <div class="modal-overlay" id="clientModal">
+    <div class="modal-content" style="max-width:620px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalClientTitle">Add New Client</h3>
+        <button class="modal-close" onclick="closeClientModal()">&times;</button>
+      </div>
+
+      <form id="clientForm">
+        <input type="hidden" id="clientId">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="clientName">Contact Person Name *</label>
+            <input type="text" id="clientName" class="form-control" placeholder="Rajesh Kumar" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="clientCompany">Company / Business Name *</label>
+            <input type="text" id="clientCompany" class="form-control" placeholder="AeroTech Solutions" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="clientEmail">Email Address *</label>
+            <input type="email" id="clientEmail" class="form-control" placeholder="rajesh@aerotech.in" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="clientPhone">Phone Number</label>
+            <input type="tel" id="clientPhone" class="form-control" placeholder="+91 98765 43210">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="clientAddress">Billing Address</label>
+          <input type="text" id="clientAddress" class="form-control" placeholder="Suite 402, TIDEL Park">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="clientCity">City</label>
+            <input type="text" id="clientCity" class="form-control" value="Coimbatore">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="clientState">State</label>
+            <input type="text" id="clientState" class="form-control" value="Tamil Nadu">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="clientCountry">Country</label>
+            <input type="text" id="clientCountry" class="form-control" value="India">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="clientGSTIN">GSTIN (Optional)</label>
+          <input type="text" id="clientGSTIN" class="form-control" placeholder="33AAAAA0000A1Z5" style="font-family:monospace; text-transform:uppercase;">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="clientNotes">Internal Notes</label>
+          <textarea id="clientNotes" class="form-control" placeholder="Special payment terms, contact preferences..."></textarea>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:20px;">
+          <button type="button" class="btn btn-secondary" onclick="closeClientModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Client</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

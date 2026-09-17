@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoices - FreelanceHub</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/i18n.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/invoices.js"></script>
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar" id="appSidebar"></aside>
+
+    <div class="main-content">
+      <header class="top-navbar" id="appHeader"></header>
+
+      <main class="page-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title" data-i18n="invoices">GST Invoices & Billing</h1>
+            <p class="page-subtitle">Generate professional tax invoices, calculate GST, and collect client payments</p>
+          </div>
+          <button class="btn btn-primary" onclick="openInvoiceModal()">+ Create Invoice</button>
+        </div>
+
+        <!-- Invoice Summary Cards -->
+        <div class="grid-cols-3" style="margin-bottom:20px;">
+          <div class="stat-card">
+            <div class="stat-icon emerald">💵</div>
+            <div class="stat-content">
+              <div class="stat-title">Paid Revenue</div>
+              <div class="stat-value" id="statPaidInvoices">₹0</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon amber">⏳</div>
+            <div class="stat-content">
+              <div class="stat-title">Pending Revenue</div>
+              <div class="stat-value" id="statPendingInvoices">₹0</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon rose">⚠️</div>
+            <div class="stat-content">
+              <div class="stat-title" data-i18n="overdueInvoices">Overdue Invoices</div>
+              <div class="stat-value" id="statOverdueInvoices">₹0</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter & Search -->
+        <div class="panel" style="padding:16px; margin-bottom:20px;">
+          <div style="display:flex; justify-content:space-between; gap:12px; align-items:center; flex-wrap:wrap;">
+            <input type="text" id="invoiceSearch" class="form-control" placeholder="Search invoice #, client, or project..." style="max-width:320px;">
+            <div style="width:180px;">
+              <select id="invoiceStatusFilter" class="form-control">
+                <option value="">All Statuses</option>
+                <option value="Draft">Draft</option>
+                <option value="Pending">Pending</option>
+                <option value="Paid">Paid</option>
+                <option value="Overdue">Overdue</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Invoices Table Panel -->
+        <div class="panel">
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Invoice #</th>
+                  <th>Client</th>
+                  <th>Project</th>
+                  <th>Issue Date</th>
+                  <th>Total Amount</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="invoicesContainer"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Create Invoice Modal -->
+  <div class="modal-overlay" id="invoiceModal">
+    <div class="modal-content" style="max-width:720px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Create Tax Invoice</h3>
+        <button class="modal-close" onclick="closeInvoiceModal()">&times;</button>
+      </div>
+
+      <form id="invoiceForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="invClientSelect">Client *</label>
+            <select id="invClientSelect" class="form-control" required></select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="invProjectSelect">Project *</label>
+            <select id="invProjectSelect" class="form-control" required></select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="invNumberInput">Invoice Number *</label>
+            <input type="text" id="invNumberInput" class="form-control" value="INV-2026-003" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="invIssueDate">Issue Date *</label>
+            <input type="date" id="invIssueDate" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="invDueDate">Due Date *</label>
+            <input type="date" id="invDueDate" class="form-control" required>
+          </div>
+        </div>
+
+        <!-- Line Items Section -->
+        <div style="margin:20px 0;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <h4 style="font-size:14px; font-weight:700;">Line Items</h4>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="addInvoiceItemRow()">+ Add Item Row</button>
+          </div>
+
+          <div id="invoiceItemsContainer"></div>
+        </div>
+
+        <!-- Financial Calculation Summary -->
+        <div style="background:var(--light-bg); border-radius:var(--radius-md); padding:16px; margin-bottom:20px;">
+          <div class="form-row">
+            <div class="form-group" style="margin:0;">
+              <label class="form-label" for="invTaxRate">GST Rate (%)</label>
+              <input type="number" id="invTaxRate" class="form-control" value="18" oninput="recalculateInvoiceTotal()">
+            </div>
+            <div style="flex:2; display:flex; flex-direction:column; justify-content:center; text-align:right; font-size:13px; gap:4px;">
+              <div>Subtotal: <strong id="invCalcSubtotal">₹0</strong></div>
+              <div>GST Tax: <strong id="invCalcTax">₹0</strong></div>
+              <div style="font-size:16px; font-weight:800; color:var(--primary);">Total Payable: <span id="invCalcTotal">₹0</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="invNotes">Payment Terms / Notes</label>
+          <textarea id="invNotes" class="form-control" placeholder="Bank details or UPI ID for payment transfer..."></textarea>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:20px;">
+          <button type="button" class="btn btn-secondary" onclick="closeInvoiceModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Generate Invoice</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Invoice Preview & Printable Modal -->
+  <div class="modal-overlay" id="invoicePreviewModal">
+    <div class="modal-content" style="max-width:800px; padding:20px;">
+      <div style="display:flex; justify-content:space-between; margin-bottom:16px;">
+        <button class="btn btn-secondary btn-sm" onclick="window.print()">🖨️ Print / Save PDF</button>
+        <button class="modal-close" onclick="closeInvoicePreviewModal()">&times;</button>
+      </div>
+      <div id="invoicePreviewBody"></div>
+    </div>
+  </div>
+
+</body>
+</html>

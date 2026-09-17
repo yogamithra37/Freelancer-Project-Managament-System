@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects - FreelanceHub</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/i18n.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/projects.js"></script>
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar" id="appSidebar"></aside>
+
+    <div class="main-content">
+      <header class="top-navbar" id="appHeader"></header>
+
+      <main class="page-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title" data-i18n="projects">Projects Management</h1>
+            <p class="page-subtitle">Track project health, remaining budgets, and milestone progress</p>
+          </div>
+          <button class="btn btn-primary" onclick="openProjectModal()">+ Add Project</button>
+        </div>
+
+        <!-- Filters & Search Bar -->
+        <div class="panel" style="padding:16px; margin-bottom:20px;">
+          <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:center;">
+            <div style="flex:1; min-width:240px;">
+              <input type="text" id="projectSearch" class="form-control" placeholder="Search project name or client..." data-i18n="search">
+            </div>
+
+            <div style="width:160px;">
+              <select id="projectStatusFilter" class="form-control">
+                <option value="">All Statuses</option>
+                <option value="Not Started">Not Started</option>
+                <option value="In Progress">In Progress</option>
+                <option value="On Hold">On Hold</option>
+                <option value="Completed">Completed</option>
+              </select>
+            </div>
+
+            <div style="width:160px;">
+              <select id="projectPriorityFilter" class="form-control">
+                <option value="">All Priorities</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+                <option value="Urgent">Urgent</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="grid-cols-3" id="projectsContainer"></div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Add/Edit Project Modal -->
+  <div class="modal-overlay" id="projectModal">
+    <div class="modal-content" style="max-width:620px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalProjectTitle">Add New Project</h3>
+        <button class="modal-close" onclick="closeProjectModal()">&times;</button>
+      </div>
+
+      <form id="projectForm">
+        <input type="hidden" id="projectId">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="projectClientSelect">Client *</label>
+            <select id="projectClientSelect" class="form-control" required></select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="projectName">Project Name *</label>
+            <input type="text" id="projectName" class="form-control" placeholder="E-commerce Redesign" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="projectCategory">Category</label>
+            <select id="projectCategory" class="form-control">
+              <option value="Web Development">Web Development</option>
+              <option value="Mobile App">Mobile App</option>
+              <option value="UI/UX Design">UI/UX Design</option>
+              <option value="SEO & Marketing">SEO & Marketing</option>
+              <option value="Consulting">Consulting</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="projectBudget">Budget Amount (₹) *</label>
+            <input type="number" id="projectBudget" class="form-control" placeholder="120000" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="projectStartDate">Start Date</label>
+            <input type="date" id="projectStartDate" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="projectDeadline">Deadline *</label>
+            <input type="date" id="projectDeadline" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="projectPriority">Priority</label>
+            <select id="projectPriority" class="form-control">
+              <option value="Low">Low</option>
+              <option value="Medium" selected>Medium</option>
+              <option value="High">High</option>
+              <option value="Urgent">Urgent</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="projectStatus">Status</label>
+            <select id="projectStatus" class="form-control">
+              <option value="Not Started">Not Started</option>
+              <option value="In Progress" selected>In Progress</option>
+              <option value="On Hold">On Hold</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="projectProgress">Progress (%)</label>
+            <input type="number" id="projectProgress" class="form-control" min="0" max="100" value="0">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="projectDescription">Project Scope & Description</label>
+          <textarea id="projectDescription" class="form-control" placeholder="Provide details regarding deliverables, tech stack, and scope..."></textarea>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:20px;">
+          <button type="button" class="btn btn-secondary" onclick="closeProjectModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Project</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

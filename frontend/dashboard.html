@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - FreelanceHub</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/i18n.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/dashboard.js"></script>
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="appSidebar"></aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Top Navbar -->
+      <header class="top-navbar" id="appHeader"></header>
+
+      <!-- Page Body -->
+      <main class="page-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title" data-i18n="dashboard">Dashboard Overview</h1>
+            <p class="page-subtitle">Welcome back! Here is your business health at a glance.</p>
+          </div>
+          <div style="display:flex; gap:12px;">
+            <a href="/projects.html" class="btn btn-primary">+ New Project</a>
+            <a href="/invoices.html" class="btn btn-secondary">+ New Invoice</a>
+          </div>
+        </div>
+
+        <!-- Stat Cards Grid -->
+        <div class="grid-cols-4" style="margin-bottom:24px;">
+          <div class="stat-card">
+            <div class="stat-icon indigo">📁</div>
+            <div class="stat-content">
+              <div class="stat-title" data-i18n="totalProjects">Total Projects</div>
+              <div class="stat-value" id="statTotalProjects">0</div>
+              <div class="stat-change up" id="statActiveProjectsLabel"><span id="statActiveProjects">0</span> Active</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon sky">👥</div>
+            <div class="stat-content">
+              <div class="stat-title" data-i18n="totalClients">Total Clients</div>
+              <div class="stat-value" id="statTotalClients">0</div>
+              <div class="stat-change up">Active Relationships</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon emerald">💰</div>
+            <div class="stat-content">
+              <div class="stat-title" data-i18n="totalRevenue">Total Revenue</div>
+              <div class="stat-value" id="statTotalRevenue">₹0</div>
+              <div class="stat-change up">Paid Invoices</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon amber">⏳</div>
+            <div class="stat-content">
+              <div class="stat-title" data-i18n="pendingPayments">Pending Payments</div>
+              <div class="stat-value" id="statPendingPayments">₹0</div>
+              <div class="stat-change down">Outstanding Invoices</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Secondary Financial Cards -->
+        <div class="grid-cols-3" style="margin-bottom:24px;">
+          <div class="stat-card">
+            <div class="stat-icon rose">💸</div>
+            <div class="stat-content">
+              <div class="stat-title" data-i18n="totalExpenses">Total Expenses</div>
+              <div class="stat-value" id="statTotalExpenses">₹0</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon emerald">📈</div>
+            <div class="stat-content">
+              <div class="stat-title" data-i18n="netProfit">Net Profit</div>
+              <div class="stat-value" id="statNetProfit">₹0</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon indigo">⭐</div>
+            <div class="stat-content">
+              <div class="stat-title" data-i18n="productivityScore">Productivity Score</div>
+              <div class="stat-value" id="productivityScoreVal">0/100</div>
+              <div class="progress-container" style="margin-top:6px;">
+                <div class="progress-bar success" id="productivityScoreBar" style="width:0%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts & Goal Grid -->
+        <div class="grid-cols-2" style="margin-bottom:24px;">
+          <!-- Revenue Bar Chart -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title">Revenue Trajectory</h3>
+              <span class="badge badge-success">2026</span>
+            </div>
+            <div id="revenueChartCanvas"></div>
+          </div>
+
+          <!-- Expense Breakdown -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title">Expense Distribution</h3>
+              <span class="badge badge-warning">By Category</span>
+            </div>
+            <div id="expenseChartCanvas"></div>
+          </div>
+        </div>
+
+        <!-- Project Health & Monthly Goal Bar -->
+        <div class="grid-cols-2" style="margin-bottom:24px;">
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title" data-i18n="projectHealth">Project Health Indicator</h3>
+            </div>
+            <div style="display:flex; justify-content:space-around; text-align:center; padding:12px 0;">
+              <div>
+                <div style="font-size:28px; font-weight:800; color:var(--success);" id="healthHealthyCount">0</div>
+                <div style="font-size:12px; color:var(--text-muted);" data-i18n="healthy">Healthy</div>
+              </div>
+              <div>
+                <div style="font-size:28px; font-weight:800; color:var(--warning);" id="healthAtRiskCount">0</div>
+                <div style="font-size:12px; color:var(--text-muted);" data-i18n="atRisk">At Risk</div>
+              </div>
+              <div>
+                <div style="font-size:28px; font-weight:800; color:var(--danger);" id="healthDelayedCount">0</div>
+                <div style="font-size:12px; color:var(--text-muted);" data-i18n="delayed">Delayed</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title" data-i18n="monthlyGoal">Monthly Target Progress</h3>
+              <span class="badge badge-info" id="monthlyGoalProgressVal">0%</span>
+            </div>
+            <div style="margin-top:12px;">
+              <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:700; margin-bottom:8px;">
+                <span>Target: <span id="monthlyGoalVal">₹1,50,000</span></span>
+              </div>
+              <div class="progress-container" style="height:12px;">
+                <div class="progress-bar success" id="monthlyGoalBar" style="width:0%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Today's Tasks & Upcoming Deadlines Grid -->
+        <div class="grid-cols-2">
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title">Today's Tasks</h3>
+              <a href="/tasks.html" style="font-size:13px; color:var(--primary); font-weight:600; text-decoration:none;">View All →</a>
+            </div>
+            <div id="todayTasksList"></div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title">Upcoming Deadlines</h3>
+              <a href="/calendar.html" style="font-size:13px; color:var(--primary); font-weight:600; text-decoration:none;">Calendar →</a>
+            </div>
+            <div id="upcomingDeadlinesList"></div>
+          </div>
+        </div>
+
+        <!-- Recent Activity Panel -->
+        <div class="panel" style="margin-top:24px;">
+          <div class="panel-header">
+            <h3 class="panel-title">Recent Audit Log</h3>
+          </div>
+          <div id="recentActivityList"></div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+</body>
+</html>

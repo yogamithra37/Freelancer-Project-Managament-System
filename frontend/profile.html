@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - FreelanceHub</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/i18n.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/profile.js"></script>
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar" id="appSidebar"></aside>
+
+    <div class="main-content">
+      <header class="top-navbar" id="appHeader"></header>
+
+      <main class="page-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title" data-i18n="editProfile">Freelancer Profile</h1>
+            <p class="page-subtitle">Manage your contact information, rates, skills, and bio</p>
+          </div>
+        </div>
+
+        <div class="grid-cols-2">
+          <!-- Profile Form -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title" data-i18n="editProfile">Personal & Professional Information</h3>
+            </div>
+
+            <form id="profileForm">
+              <div class="form-group">
+                <label class="form-label" for="profName" data-i18n="fullName">Full Name</label>
+                <input type="text" id="profName" class="form-control" value="Arun Kumar" required>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="profEmail" data-i18n="email">Email Address</label>
+                  <input type="email" id="profEmail" class="form-control" value="arun@example.com" disabled style="background:var(--light-bg); cursor:not-allowed;">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="profPhone" data-i18n="phone">Phone Number</label>
+                  <input type="tel" id="profPhone" class="form-control" value="+91 9876543210" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="profHourlyRate" data-i18n="hourlyRate">Hourly Rate (₹/hr)</label>
+                  <input type="number" id="profHourlyRate" class="form-control" value="1500" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="profExp" data-i18n="experienceYears">Experience (Years)</label>
+                  <input type="number" id="profExp" class="form-control" value="5" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="profLocation" data-i18n="location">Location</label>
+                <input type="text" id="profLocation" class="form-control" value="Coimbatore, Tamil Nadu, India" required>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="profLanguages" data-i18n="languages">Languages</label>
+                  <input type="text" id="profLanguages" class="form-control" value="English, Tamil, Hindi" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="profPortfolio" data-i18n="portfolioUrl">Portfolio Website</label>
+                  <input type="url" id="profPortfolio" class="form-control" value="https://arunkumar.dev">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="profSkills" data-i18n="skills">Skills & Expertise</label>
+                <input type="text" id="profSkills" class="form-control" value="Node.js, Express, React, JavaScript, HTML5/CSS3, Tailwind CSS, REST APIs, SQL" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="profBio" data-i18n="bio">Bio / Summary</label>
+                <textarea id="profBio" class="form-control" rows="3" required>Senior Full-Stack Web Developer & UI/UX Specialist crafting high-performance digital web applications and enterprise portals for global clients.</textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width:100%; margin-top:12px; padding:12px;" data-i18n="saveProfile">Save Profile</button>
+            </form>
+          </div>
+
+          <!-- Password Form -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title">Change Account Password</h3>
+            </div>
+
+            <form id="passwordForm">
+              <div class="form-group">
+                <label class="form-label" for="passCurrent">Current Password</label>
+                <input type="password" id="passCurrent" class="form-control" placeholder="Enter current password" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="passNew">New Password</label>
+                <input type="password" id="passNew" class="form-control" placeholder="Enter new password" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="passConfirm">Confirm New Password</label>
+                <input type="password" id="passConfirm" class="form-control" placeholder="Re-enter new password" required>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width:100%; margin-top:12px; padding:12px;">Update Password</button>
+            </form>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+</body>
+</html>
